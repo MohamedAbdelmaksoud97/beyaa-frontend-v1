@@ -14,5 +14,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  base: process.env.VITE_BASE_PATH || "/", // 🔑 important for Vercel routing
+  base: "/", // 🔑 important for Vercel routing
 });

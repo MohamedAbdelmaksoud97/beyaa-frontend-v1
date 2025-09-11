@@ -2,7 +2,7 @@
 
 // ✅ Centralized API base (switches automatically between dev/prod)
 const API_BASE = import.meta.env.VITE_API_BASE;
-
+console.log("ssss", API_BASE);
 export async function signUp(values) {
   const res = await fetch(`${API_BASE}/users/signUp`, {
     method: "POST",
