@@ -14,5 +14,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  base: "/", // 🔑 important for Vercel routing
+  base: process.env.VITE_BASE_PATH || "/beyaa-frontend-v1", // 🔑 important for Vercel routing
 });
