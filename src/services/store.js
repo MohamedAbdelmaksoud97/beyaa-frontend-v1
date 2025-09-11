@@ -51,7 +51,7 @@ export async function getMyStore() {
 }
 export async function getStore(storeSlug) {
   const res = await fetch(
-    `http://beyaa-api-env.eba-qwicqvfm.eu-north-1.elasticbeanstalk.com/api/v1/${storeSlug}`,
+    `https://beyaa-api-env.eba-qwicqvfm.eu-north-1.elasticbeanstalk.com/api/v1/${storeSlug}`,
     {
       credentials: "include", // keep if you use cookies/JWT
     },
