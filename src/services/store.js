@@ -50,9 +50,12 @@ export async function getMyStore() {
   return data.data;
 }
 export async function getStore(storeSlug) {
-  const res = await fetch(`http://localhost:3000/api/v1/${storeSlug}`, {
-    credentials: "include", // keep if you use cookies/JWT
-  });
+  const res = await fetch(
+    `http://beyaa-api-env.eba-qwicqvfm.eu-north-1.elasticbeanstalk.com/api/v1/${storeSlug}`,
+    {
+      credentials: "include", // keep if you use cookies/JWT
+    },
+  );
 
   const data = await res.json().catch(() => null);
 
