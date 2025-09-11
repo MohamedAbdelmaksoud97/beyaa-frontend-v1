@@ -1,6 +1,8 @@
 // api/products.js
+const API_BASE = import.meta.env.VITE_API_BASE;
+
 export async function fetchProducts(storeId) {
-  const res = await fetch(`http://localhost:3000/api/v1/${storeId}/products`); // replace with your API
+  const res = await fetch(`${API_BASE}/${storeId}/products`);
   if (!res.ok) {
     throw new Error("Failed to fetch products");
   }
@@ -9,12 +11,14 @@ export async function fetchProducts(storeId) {
   console.log(data);
   return data.data;
 }
+
 export async function fetchOneProduct(id) {
-  const res = await fetch(
-    `http://localhost:3000/api/v1/6899413d48aa030033f87755/products/${id}`,
-  ); // replace with your API
+  // 👇 storeId was hardcoded before — you probably want it dynamic
+  const storeId = "6899413d48aa030033f87755";
+  const res = await fetch(`${API_BASE}/${storeId}/products/${id}`);
+
   if (!res.ok) {
-    throw new Error("Failed to fetch products");
+    throw new Error("Failed to fetch product");
   }
 
   const data = await res.json();
@@ -24,7 +28,7 @@ export async function fetchOneProduct(id) {
 
 // services/products.js
 export async function createProduct(formValues, storeId) {
-  const url = `http://localhost:3000/api/v1/${storeId}/createProduct`;
+  const url = `${API_BASE}/${storeId}/createProduct`;
 
   const fd = new FormData();
   // primitives
@@ -59,13 +63,10 @@ export async function createProduct(formValues, storeId) {
 }
 
 export async function deleteProduct(slug, productId) {
-  const res = await fetch(
-    `http://localhost:3000/api/v1/${slug}/products/${productId}`,
-    {
-      method: "DELETE",
-      credentials: "include", // keep cookies/JWT if needed
-    },
-  );
+  const res = await fetch(`${API_BASE}/${slug}/products/${productId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
 
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));

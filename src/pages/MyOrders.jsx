@@ -1,6 +1,10 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { fetchOrders, updateOrderStatus } from "@/services/purchase";
+import {
+  fetchOrders,
+  updateOrderStatus,
+  deletePurchase,
+} from "@/services/orders";
 import MainWrapper from "@/ui/MainWrapper";
 import { Card, CardContent } from "@/components/ui/card";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
@@ -42,24 +46,6 @@ function StatusBadge({ status }) {
       {status}
     </span>
   );
-}
-
-// --- API: delete purchase ---
-async function deletePurchase({ slug, orderId }) {
-  const res = await fetch(
-    `http://localhost:3000/api/v1/${slug}/purchases/${orderId}`,
-    {
-      method: "DELETE",
-      credentials: "include",
-    },
-  );
-
-  if (!res.ok) {
-    const data = await res.json().catch(() => ({}));
-    throw new Error(data?.message || "Failed to delete purchase");
-  }
-
-  return true;
 }
 
 function MyOrders() {
