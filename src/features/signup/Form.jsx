@@ -20,6 +20,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import StepHero from "./stepHero";
 import { useMutation } from "@tanstack/react-query";
 import { createStore } from "../../services/store";
+import { Navigate, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const fullSchema = z.object({
   storeName: z
@@ -44,7 +46,7 @@ const fullSchema = z.object({
   heading: z
     .string()
     .min(2, { message: "Heading must be at least 2 characters long." }),
-  subheading: z
+  subHeading: z
     .string()
     .min(4, { message: "Subheading must be at least 4 characters long." }),
   heroImage: z.string().min(1, { message: "Please select a hero image." }),
@@ -57,24 +59,26 @@ const DEFAULTS = {
   brandColor: "#2664e9",
   logo: null,
   heading: "",
-  subheading: "",
+  subHeading: "",
   heroImage: "",
 };
 
 const STEP_FIELDS = {
   1: ["storeName", "whatSell", "description"],
   2: ["brandColor", "logo"],
-  3: ["heading", "subheading", "heroImage"],
+  3: ["heading", "subHeading", "heroImage"],
 };
 
 const TOTAL_STEPS = 3;
 
 export default function CreateStoreWizard({ onCreateStore }) {
+  const navigate = useNavigate();
   const mutation = useMutation({
     mutationFn: createStore,
     onSuccess: (data) => {
       console.log("Store created:", data);
-      window.alert("Store created successfully!");
+      navigate(`/${data?.data?.slug}`); // Redirect to the new store page
+      toast.success("Store created successfully!");
       // You could also trigger a refetch or update UI here
     },
     onError: (error) => {
@@ -112,8 +116,9 @@ export default function CreateStoreWizard({ onCreateStore }) {
       formData.append("name", values.storeName); // Changed to match backend
       formData.append("storeInformation", values.description);
       formData.append("whatSell", values.whatSell);
+      formData.append("brandColor", values.brandColor);
       formData.append("heading", values.heading);
-      formData.append("subheading", values.subheading);
+      formData.append("subHeading", values.subHeading);
       formData.append("heroImage", values.heroImage); // Ensure this is a string path
 
       // Handle files

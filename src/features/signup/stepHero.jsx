@@ -25,7 +25,7 @@ export default function StepHero({
   isSubmitting,
 }) {
   const heading = watch("heading");
-  const subheading = watch("subheading");
+  const subHeading = watch("subHeading");
   const whatSell = watch("whatSell");
   console.log(whatSell);
 
@@ -57,7 +57,7 @@ export default function StepHero({
           });
         }}
         heading={heading}
-        subheading={subheading}
+        subheading={subHeading}
         control={control}
         brandColor={brandColor}
         slides={[
@@ -68,7 +68,7 @@ export default function StepHero({
             image: `/images/heroImage/${whatSell}/image2.jpg`,
           },
           {
-            image: "/images/slide3.jpg",
+            image: `/images/heroImage/${whatSell}/image3.jpg`,
           },
         ]}
       />
@@ -92,7 +92,7 @@ export default function StepHero({
       {/* Subheading input */}
       <FormField
         control={control}
-        name="subheading"
+        name="subHeading"
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-md font-normal">Subheading</FormLabel>

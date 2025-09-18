@@ -110,9 +110,9 @@ export default function ProductPage() {
         <div className="my-5 flex justify-between rounded-full bg-white"></div>
         <div className="relative lg:w-1/2">
           <img
-            src={`http://localhost:3000/img/products/${product.images[0]}`}
+            src={`${import.meta.env.VITE_ASSETS_BASE}/img/products/${product.images[0]}`}
             alt="Loose Fit Denim Jacket"
-            className="aspect-square w-full object-cover"
+            className="aspect-square w-full object-contain"
           />
         </div>
 

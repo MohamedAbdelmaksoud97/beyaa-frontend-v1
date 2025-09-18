@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProducts } from "@/services/products";
 import { useStoreSlug } from "@/contexts/StoreContext";
 import { useParams, useNavigate } from "react-router-dom";
-import { PackageOpen } from "lucide-react";
+import { Loader2, PackageOpen } from "lucide-react";
 import { useUser } from "@/contexts/AuthContext";
 
 function Products() {
@@ -26,7 +26,12 @@ function Products() {
     staleTime: 1000 * 60 * 5, // (optional) 5 min cache
   });
 
-  if (isLoading) return <p>Loading products...</p>;
+  if (isLoading)
+    return (
+      <div className="grid h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-slate-600" />
+      </div>
+    );
   if (error) return <p className="text-red-500">Error: {error.message}</p>;
 
   // ✅ Empty state: no products

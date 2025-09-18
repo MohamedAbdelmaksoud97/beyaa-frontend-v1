@@ -27,7 +27,7 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 
 // --- Status Badge Component ---
 function StatusBadge({ status }) {
@@ -77,8 +77,8 @@ function MyOrders() {
 
   if (isPending)
     return (
-      <div className="flex h-64 items-center justify-center">
-        <Spinner className="text-primary-500 h-6 w-6" />
+      <div className="grid h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-slate-600" />
       </div>
     );
 

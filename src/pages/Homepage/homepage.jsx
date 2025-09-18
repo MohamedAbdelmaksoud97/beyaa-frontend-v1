@@ -20,6 +20,8 @@ import { Spinner } from "@/components/ui/shadcn-io/spinner/index.jsx";
 import { useStoreSlug } from "@/contexts/StoreContext.jsx";
 import { useParams } from "react-router-dom";
 import Form from "@/features/signup/Form.jsx";
+import { Loader2 } from "lucide-react"; // ⬅️ import
+
 /**
  * Storefront screen in plain React (JS) + Tailwind + lucide-react icons.
  * No Next.js dependencies. Uses <img> for images.
@@ -57,8 +59,8 @@ export default function Homepage() {
 
   if (storeLoading) {
     return (
-      <div className="grid h-24 place-items-center">
-        <Spinner />
+      <div className="grid h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-slate-600" />
       </div>
     );
   }
@@ -72,7 +74,12 @@ export default function Homepage() {
   console.log(store);
 
   console.log(products);
-  if (isLoading) return <p>Loading products...</p>;
+  if (isLoading)
+    return (
+      <div className="grid h-screen items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-slate-600" />
+      </div>
+    );
   if (error) return <p className="text-red-500">Error: {error.message}</p>;
 
   const newArrivalProducts = products.slice(0, 10);

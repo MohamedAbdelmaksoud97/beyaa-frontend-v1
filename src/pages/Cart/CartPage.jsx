@@ -16,6 +16,7 @@ function CartPage() {
   const { slug } = useParams();
   const { data: store } = useStoreSlug(slug);
   const brandHex = store?.brandColor || "#0ea5e9";
+  console.log(brandHex);
 
   return (
     <MainWrapper pageName={"My Cart"}>
@@ -85,7 +86,7 @@ function CartPage() {
           <motion.div layout transition={{ duration: 0.3 }}>
             <Button
               onClick={() => navigate(`/${slug}/shippingForm`)}
-              className="mt-6 w-full text-white shadow transition-transform duration-300 hover:scale-[1.05] hover:opacity-90 active:scale-[0.98]"
+              className="mt-6 w-full bg-[color:var(--brand-color)] text-white shadow transition-transform duration-300 hover:scale-[1.05] hover:bg-[color:var(--brand-color)] hover:opacity-90 active:scale-[0.98]"
               style={{ "--brand-color": brandHex }}
             >
               Checkout

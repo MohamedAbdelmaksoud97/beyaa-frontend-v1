@@ -71,6 +71,7 @@ export default function ItemStoreBrandSetting() {
       }
 
       toast.success("Brand settings updated!");
+      queryClient.invalidateQueries({ queryKey: ["store"] });
     },
     onError: (error) => {
       toast.error(error.message || "Something went wrong!");

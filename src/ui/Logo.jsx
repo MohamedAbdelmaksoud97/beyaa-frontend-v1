@@ -8,7 +8,7 @@ function Logo({ logo, name }) {
 
   return logo ? (
     <img
-      src={`http://localhost:3000/img/logos/${logo}`}
+      src={`${import.meta.env.VITE_ASSETS_BASE}/img/logos/${logo}`}
       alt={name}
       className="h-10 w-10"
     />

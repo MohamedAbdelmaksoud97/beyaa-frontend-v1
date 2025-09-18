@@ -42,7 +42,7 @@ function CartCard({ product, type, setTotal }) {
             <Link to={`/${slug}/productPage/${product.productId}`}>
               <img
                 className="aspect-square h-full w-full object-cover"
-                src={`http://localhost:3000/img/products/${product.images[0]}`}
+                src={`${import.meta.env.VITE_ASSETS_BASE}/img/products/${product.images[0]}`}
               />
             </Link>
           </div>

@@ -176,7 +176,7 @@ export default function ShippingForm() {
           <Button
             type="submit"
             disabled={mutation.isPending}
-            className="mt-6 w-full bg-[color:var(--brand-color)] text-white active:scale-[0.98]"
+            className="mt-6 w-full bg-[color:var(--brand-color)] text-white hover:scale-[1.05] hover:bg-[color:var(--brand-color)] hover:opacity-90 active:scale-[0.98]"
             style={{ "--brand-color": brandHex }}
           >
             {mutation.isPending ? (

@@ -36,6 +36,9 @@ const Hero = () => {
               <Button
                 size="lg"
                 className="group border border-white/20 bg-white/10 text-white hover:bg-white/20"
+                onClick={() =>
+                  window.open("/trendora", "_blank", "noopener,noreferrer")
+                }
               >
                 <Play className="h-5 w-5" />
                 See Demo

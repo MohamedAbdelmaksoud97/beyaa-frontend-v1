@@ -11,7 +11,7 @@ function ProductCard({ product, type }) {
           <div className="relative w-[full] cursor-pointer overflow-hidden">
             <Heart product={product} />
             <img
-              src={`http://localhost:3000/img/products/${product.images[0]}`}
+              src={`${import.meta.env.VITE_ASSETS_BASE}/img/products/${product.images[0]}`}
               alt={product.name}
               className="object-fit aspect-square w-full transition-transform duration-300 hover:scale-[1.05]"
             />

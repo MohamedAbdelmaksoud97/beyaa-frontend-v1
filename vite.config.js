@@ -12,7 +12,12 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: "dist",
+    // 👉 Output directly into backend/public
+    outDir: path.resolve(__dirname, "../Desktop/Beyaa/public"),
+    emptyOutDir: true, // remove old files before building
   },
-  base: "/", // 🔑 important for Vercel routing
+  base: "/", // ✅ ensures assets load correctly
+  server: {
+    historyApiFallback: true, // ✅ fixes React Router reloads in dev
+  },
 });
