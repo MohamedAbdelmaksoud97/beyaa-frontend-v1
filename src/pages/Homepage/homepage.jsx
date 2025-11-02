@@ -21,6 +21,7 @@ import { useStoreSlug } from "@/contexts/StoreContext.jsx";
 import { useParams } from "react-router-dom";
 import Form from "@/features/signup/Form.jsx";
 import { Loader2 } from "lucide-react"; // ⬅️ import
+import StoreBanners from "./storeBanners.jsx";
 
 /**
  * Storefront screen in plain React (JS) + Tailwind + lucide-react icons.
@@ -109,6 +110,7 @@ export default function Homepage() {
           products={newArrivalProducts}
           sectionTitle="New Arrival"
         />
+        <StoreBanners brandColor={store?.brandColor} banners={store?.banners} />
       </main>
 
       <BottomNav />

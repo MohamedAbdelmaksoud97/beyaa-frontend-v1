@@ -73,8 +73,10 @@ export default function AddProduct() {
     isError,
     isStoreError,
   } = useStoreSlug(slug);
-  console.log(store?.id);
-  const storeId = store?.id;
+
+  console.log("ssdsdssdsdsdsds", store);
+  const storeId = store?._id;
+  console.log("storeId:", storeId);
   const [imageNames, setImageNames] = useState([]);
 
   const methods = useForm({

@@ -29,6 +29,7 @@ export async function fetchOneProduct(id) {
 // services/products.js
 export async function createProduct(formValues, storeId) {
   const url = `${API_BASE}/${storeId}/createProduct`;
+  console.log(storeId);
 
   const fd = new FormData();
   // primitives

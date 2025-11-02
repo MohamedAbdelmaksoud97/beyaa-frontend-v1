@@ -1,19 +1,21 @@
 // services/store.js
-
+import { parseJsonSafe, makeApiError } from "./http";
 // ✅ Centralized API base (switches between dev & prod automatically)
 const API_BASE = import.meta.env.VITE_API_BASE;
+
+// services/store.js
 
 export async function createStore(storeInfo) {
   const res = await fetch(`${API_BASE}/createStore`, {
     method: "POST",
-    body: storeInfo, // FormData
+    body: storeInfo,
     credentials: "include",
   });
 
-  const data = await res.json().catch(() => null);
+  const data = await parseJsonSafe(res);
 
   if (!res.ok) {
-    throw new Error(data?.message);
+    throw makeApiError(res, data, "Create store failed"); // ✅ keeps fields
   }
 
   return data;
@@ -80,4 +82,33 @@ export async function updateStoreBrand(formData, storeId) {
   }
 
   return data;
+}
+
+export async function addBanner(storeId, formData) {
+  const res = await fetch(`${API_BASE}/${storeId}/banners`, {
+    method: "POST",
+    body: formData, // FormData with fields: image, title, startDate, endDate, etc.
+    credentials: "include",
+  });
+  const data = await parseJsonSafe(res);
+
+  if (!res.ok) {
+    throw makeApiError(res, data, "Add banner failed"); // ✅ keeps fields
+  }
+
+  return data.data; // returns updated banners array
+}
+
+export async function removeBanner(storeId, bannerId) {
+  const res = await fetch(`${API_BASE}/${storeId}/banners/${bannerId}`, {
+    method: "DELETE",
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => null);
+    throw new Error(data?.message || "Remove banner failed");
+  }
+
+  return true; // success, no content (204)
 }

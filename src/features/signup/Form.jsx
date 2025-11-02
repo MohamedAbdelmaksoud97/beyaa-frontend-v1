@@ -82,7 +82,13 @@ export default function CreateStoreWizard({ onCreateStore }) {
       // You could also trigger a refetch or update UI here
     },
     onError: (error) => {
-      console.error("Error:", error.message);
+      console.error("Error:", error);
+      console.log(error.message.split(" ")[3]);
+      if (error.code === "DUPLICATE_KEY" && error.fieldErrors?.slug) {
+        toast.error(
+          "Store with this name already exists, please choose another.",
+        );
+      }
     },
   });
 

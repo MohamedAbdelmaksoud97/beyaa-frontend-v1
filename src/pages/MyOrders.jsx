@@ -28,6 +28,7 @@ import {
   AlertDialogAction,
 } from "@/components/ui/alert-dialog";
 import { Loader2, Trash2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 // --- Status Badge Component ---
 function StatusBadge({ status }) {
@@ -72,6 +73,7 @@ function MyOrders() {
     mutationFn: deletePurchase,
     onSuccess: () => {
       queryClient.invalidateQueries(["orders", slug]);
+      toast.success("order deleted successfully");
     },
   });
 

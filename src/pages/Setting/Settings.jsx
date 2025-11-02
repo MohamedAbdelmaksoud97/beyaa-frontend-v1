@@ -3,6 +3,7 @@ import MainWrapper from "@/ui/MainWrapper";
 import AccountSettings from "./AccountSettings";
 import PasswordSettings from "./PasswordSettings";
 import StoreSetiings from "./StoreSetiings";
+import { Outlet } from "react-router-dom";
 
 function Settings() {
   return (

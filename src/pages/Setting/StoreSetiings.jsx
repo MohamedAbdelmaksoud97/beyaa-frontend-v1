@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import ItemStoreSetting from "./ItemStoreSetting"; // step 1
 import ItemStoreHeroSetting from "./ItemStoreHeroSetting"; // step 3
 import ItemStoreBrandSetting from "./ItemStoreBrandSetting";
+import Banners from "./banners";
 // import ItemStoreBrand from "./ItemStoreBrand";           // (step 2 placeholder if you have it)
 // import ItemStoreSocial from "./ItemStoreSocial";         // (step 4 placeholder if you have it)
 
@@ -44,7 +45,7 @@ function StoreSettings() {
           variant="secondary"
           onClick={() => setStoreSetting(4)}
         >
-          Social Media
+          Banners
         </Button>
       </div>
 
@@ -52,11 +53,7 @@ function StoreSettings() {
       {storeSetting === 1 && <ItemStoreSetting />}
       {storeSetting === 2 && <ItemStoreBrandSetting />}
       {storeSetting === 3 && <ItemStoreHeroSetting />}
-      {storeSetting === 4 && (
-        <div className="text-muted-foreground p-6 text-sm">
-          Social step coming soon…
-        </div>
-      )}
+      {storeSetting === 4 && <Banners />}
     </div>
   );
 }

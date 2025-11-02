@@ -32,6 +32,7 @@ import AboutBeyaa from "./pages/landingPage/About";
 
 import ScrollToTop from "./ScrollToTop";
 import StoreAbout from "./pages/About";
+import Banners from "./pages/Setting/banners";
 
 export default function App() {
   function RequireAuth() {
@@ -61,6 +62,7 @@ export default function App() {
               <Route path="/beyaa/about" element={<AboutBeyaa />} />
               <Route path="signup" element={<UserForm />} />
               <Route path="createStore" element={<Form />} />
+
               <Route path="/:slug" element={<Homepage />} />
               <Route
                 path="/:slug/productPage/:productId"
@@ -72,7 +74,10 @@ export default function App() {
               <Route path="/:slug/shippingForm" element={<ShippingForm />} />
               <Route path="/:slug/products" element={<Products />} />
               <Route element={<RequireAuth />}>
-                <Route path="/:slug/settings" element={<Settings />} />
+                <Route path="/:slug/settings" element={<Settings />}>
+                  <Route path="banners" element={<Banners />} />
+                </Route>
+
                 <Route path="/:slug/addProducts" element={<AddProduct />} />
                 <Route path="/:slug/myProducts" element={<Myproducts />} />
                 <Route path="/:slug/myOrders" element={<MyOrders />} />
