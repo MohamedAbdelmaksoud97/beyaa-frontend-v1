@@ -9,6 +9,7 @@ import ItemStoreSetting from "./ItemStoreSetting"; // step 1
 import ItemStoreHeroSetting from "./ItemStoreHeroSetting"; // step 3
 import ItemStoreBrandSetting from "./ItemStoreBrandSetting";
 import Banners from "./banners";
+import FooterSettings from "./FooterSettings";
 // import ItemStoreBrand from "./ItemStoreBrand";           // (step 2 placeholder if you have it)
 // import ItemStoreSocial from "./ItemStoreSocial";         // (step 4 placeholder if you have it)
 
@@ -47,6 +48,13 @@ function StoreSettings() {
         >
           Banners
         </Button>
+        <Button
+          className={`text-gray-900 ${storeSetting === 5 ? "bg-primary-200" : "bg-gray-200"}`}
+          variant="secondary"
+          onClick={() => setStoreSetting(5)}
+        >
+          footer
+        </Button>
       </div>
 
       {/* Render the correct step */}
@@ -54,6 +62,7 @@ function StoreSettings() {
       {storeSetting === 2 && <ItemStoreBrandSetting />}
       {storeSetting === 3 && <ItemStoreHeroSetting />}
       {storeSetting === 4 && <Banners />}
+      {storeSetting === 5 && <FooterSettings />}
     </div>
   );
 }

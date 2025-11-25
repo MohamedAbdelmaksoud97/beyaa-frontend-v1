@@ -22,7 +22,7 @@ import { useParams } from "react-router-dom";
 import Form from "@/features/signup/Form.jsx";
 import { Loader2 } from "lucide-react"; // ⬅️ import
 import StoreBanners from "./storeBanners.jsx";
-
+import StoreFooter from "../Homepage/storeFooter.jsx";
 /**
  * Storefront screen in plain React (JS) + Tailwind + lucide-react icons.
  * No Next.js dependencies. Uses <img> for images.
@@ -114,6 +114,7 @@ export default function Homepage() {
       </main>
 
       <BottomNav />
+      <StoreFooter footer={store?.footer} brandColor={store?.brandColor} />
 
       {/* Simple footer anchors the header links */}
     </div>
