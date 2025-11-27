@@ -22,7 +22,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createStore } from "../../services/store";
 import { Navigate, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
+import Navigation from "@/pages/landingPage/Nav.jsx";
 const fullSchema = z.object({
   storeName: z
     .string()
@@ -160,194 +160,199 @@ export default function CreateStoreWizard({ onCreateStore }) {
   const isSubmitting = mutation.isPending || methods.formState.isSubmitting;
 
   return (
-    <div className="mx-auto w-full max-w-md px-5 pb-16">
-      <header className="pt-8 pb-4">
-        <h1 className="text-center text-2xl font-semibold tracking-tight text-slate-900">
-          Create Your Store
-        </h1>
-        <div className="bg-primary-100 mt-3 h-[3px] w-full rounded-full">
-          <div
-            className="bg-primary-500 h-full rounded-full transition-all duration-300 ease-in-out"
-            style={{ width: `${(step / 5 + 1 / 5) * 100}%` }}
-          />
-        </div>
-      </header>
+    <>
+      <Navigation />
+      <div className="mx-auto w-full max-w-md px-5 pt-20 pb-16">
+        <header className="pt-8 pb-4">
+          <h1 className="text-center text-2xl font-semibold tracking-tight text-slate-900">
+            Create Your Store
+          </h1>
+          <div className="bg-primary-100 mt-3 h-[3px] w-full rounded-full">
+            <div
+              className="bg-primary-500 h-full rounded-full transition-all duration-300 ease-in-out"
+              style={{ width: `${(step / 5 + 1 / 5) * 100}%` }}
+            />
+          </div>
+        </header>
 
-      <FormProvider {...methods}>
-        <Form {...methods}>
-          <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            className="space-y-5"
-            noValidate
-          >
-            <AnimatePresence mode="wait">
-              {step === 1 && (
-                <motion.div
-                  key="step1"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 30 }}
-                  transition={{ duration: 0.25 }}
-                  className="space-y-6"
-                >
-                  <div className="space-y-5">
-                    <FormField
-                      control={control}
-                      name="storeName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Store name</FormLabel>
-                          <FormControl>
-                            <Input {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={control}
-                      name="whatSell"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>What do you sell</FormLabel>
-                          <FormControl>
-                            <select
-                              {...field}
-                              className="h-11 w-full rounded-sm border px-3"
-                            >
-                              <option value="">Select…</option>
-                              <option value="Clothes">Clothes</option>
-                              <option value="Electronics">Electronics</option>
-                              <option value="Furniture">Furniture</option>
-                              <option value="Beauty">Beauty</option>
-                              <option value="Other">Other</option>
-                            </select>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={control}
-                      name="description"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Tell us about your store</FormLabel>
-                          <FormControl>
-                            <textarea
-                              {...field}
-                              rows={4}
-                              className="w-full rounded-sm border px-3 py-2"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="button"
-                      className="w-full"
-                      onClick={() => validateAndNext(2)}
-                    >
-                      Next
-                    </Button>
-                  </div>
-                </motion.div>
-              )}
-              {step === 2 && (
-                <motion.div
-                  key="step2"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 30 }}
-                  transition={{ duration: 0.25 }}
-                  className="space-y-6"
-                >
-                  <div className="space-y-6">
-                    <div>
-                      <FormLabel>Add your logo (optional)</FormLabel>
+        <FormProvider {...methods}>
+          <Form {...methods}>
+            <form
+              onSubmit={handleSubmit(onSubmit, onError)}
+              className="space-y-5"
+              noValidate
+            >
+              <AnimatePresence mode="wait">
+                {step === 1 && (
+                  <motion.div
+                    key="step1"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div className="space-y-5">
                       <FormField
                         control={control}
-                        name="logo"
-                        render={({ field: { value, onChange, ...field } }) => (
+                        name="storeName"
+                        render={({ field }) => (
                           <FormItem>
+                            <FormLabel>Store name</FormLabel>
                             <FormControl>
-                              <Input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                  onChange(e.target.files[0]);
-                                  setLogo(e.target.files[0].name);
-
-                                  console.log(
-                                    "Logo file selected:",
-                                    e.target.files[0].name,
-                                  );
-                                }}
-                                {...field}
-                                className="file sss mt-3 block w-full border-0 pl-0 text-slate-800 shadow-none file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:text-sm hover:file:bg-slate-200"
-                              />
+                              <Input {...field} />
                             </FormControl>
-
                             <FormMessage />
                           </FormItem>
                         )}
                       />
-                    </div>
-                    <div>
-                      <FormLabel>Pick your brand color</FormLabel>
-                      <input
-                        type="color"
-                        {...register("brandColor")}
-                        className="mt-3 h-12 w-20 cursor-pointer rounded border"
+                      <FormField
+                        control={control}
+                        name="whatSell"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>What do you sell</FormLabel>
+                            <FormControl>
+                              <select
+                                {...field}
+                                className="h-11 w-full rounded-sm border px-3"
+                              >
+                                <option value="">Select…</option>
+                                <option value="Clothes">Clothes</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Beauty">Beauty</option>
+                                <option value="Other">Other</option>
+                              </select>
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
-                    </div>
-                    <div className="mt-15 flex gap-4">
+                      <FormField
+                        control={control}
+                        name="description"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Tell us about your store</FormLabel>
+                            <FormControl>
+                              <textarea
+                                {...field}
+                                rows={4}
+                                className="w-full rounded-sm border px-3 py-2"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                       <Button
                         type="button"
-                        variant="outline"
-                        className="flex-1"
-                        onClick={() => setStep(1)}
-                      >
-                        Back
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="default"
-                        className="flex-1"
-                        onClick={() => validateAndNext(3)}
+                        className="w-full"
+                        onClick={() => validateAndNext(2)}
                       >
                         Next
                       </Button>
                     </div>
-                  </div>
-                </motion.div>
-              )}
-              {step === 3 && (
-                <motion.div
-                  key="step3"
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 30 }}
-                  transition={{ duration: 0.25 }}
-                  className="space-y-6"
-                >
-                  <StepHero
-                    control={control}
-                    brandColor={brandColor}
-                    setStep={setStep}
-                    watch={watch}
-                    setValue={setValue}
-                    trigger={trigger}
-                    register={register}
-                    isSubmitting={isSubmitting}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </form>
-        </Form>
-      </FormProvider>
-    </div>
+                  </motion.div>
+                )}
+                {step === 2 && (
+                  <motion.div
+                    key="step2"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <div className="space-y-6">
+                      <div>
+                        <FormLabel>Add your logo (optional)</FormLabel>
+                        <FormField
+                          control={control}
+                          name="logo"
+                          render={({
+                            field: { value, onChange, ...field },
+                          }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={(e) => {
+                                    onChange(e.target.files[0]);
+                                    setLogo(e.target.files[0].name);
+
+                                    console.log(
+                                      "Logo file selected:",
+                                      e.target.files[0].name,
+                                    );
+                                  }}
+                                  {...field}
+                                  className="file sss mt-3 block w-full border-0 pl-0 text-slate-800 shadow-none file:mr-3 file:rounded-md file:border-0 file:bg-slate-100 file:px-3 file:text-sm hover:file:bg-slate-200"
+                                />
+                              </FormControl>
+
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div>
+                        <FormLabel>Pick your brand color</FormLabel>
+                        <input
+                          type="color"
+                          {...register("brandColor")}
+                          className="mt-3 h-12 w-20 cursor-pointer rounded border"
+                        />
+                      </div>
+                      <div className="mt-15 flex gap-4">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="flex-1"
+                          onClick={() => setStep(1)}
+                        >
+                          Back
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="default"
+                          className="flex-1"
+                          onClick={() => validateAndNext(3)}
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+                {step === 3 && (
+                  <motion.div
+                    key="step3"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.25 }}
+                    className="space-y-6"
+                  >
+                    <StepHero
+                      control={control}
+                      brandColor={brandColor}
+                      setStep={setStep}
+                      watch={watch}
+                      setValue={setValue}
+                      trigger={trigger}
+                      register={register}
+                      isSubmitting={isSubmitting}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </form>
+          </Form>
+        </FormProvider>
+      </div>
+    </>
   );
 }

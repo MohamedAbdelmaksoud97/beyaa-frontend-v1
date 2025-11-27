@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/input";
 import { Spinner } from "@/components/ui/shadcn-io/spinner";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Navigation from "@/pages/landingPage/Nav.jsx";
 // ── Validation
 const formSchema = z
   .object({
@@ -106,150 +107,160 @@ export default function CreateStoreForm({ setStep }) {
   const isSubmitting = mutation.isPending || form.formState.isSubmitting;
 
   return (
-    <div className="mx-auto w-full max-w-md px-5 pb-16">
-      {/* Header */}
-      <header className="pt-8 pb-4">
-        <h1 className="text-center text-2xl font-semibold tracking-tight text-slate-900">
-          Create Your Store
-        </h1>
+    <>
+      <Navigation />
+      <div className="mx-auto w-full max-w-md px-5 pt-20 pb-16">
+        {/* Header */}
+        <header className="pt-8 pb-4">
+          <h1 className="text-center text-2xl font-semibold tracking-tight text-slate-900">
+            Create Your Store
+          </h1>
 
-        {/* Thin progress bar under the title (adjust width% to match step) */}
-        <div className="bg-primary-100 mt-3 h-[3px] w-full rounded-full">
-          <div
-            className="bg-primary-500 h-full -translate-x-full rounded-full transition-transform duration-300 ease-in-out data-[open=true]:translate-x-0"
-            style={{ width: "18%" }} // ← adjust step progress here
-          />
-        </div>
-      </header>
+          {/* Thin progress bar under the title (adjust width% to match step) */}
+          <div className="bg-primary-100 mt-3 h-[3px] w-full rounded-full">
+            <div
+              className="bg-primary-500 h-full -translate-x-full rounded-full transition-transform duration-300 ease-in-out data-[open=true]:translate-x-0"
+              style={{ width: "18%" }} // ← adjust step progress here
+            />
+          </div>
+        </header>
 
-      {/* Form */}
-      <Form {...form}>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key="step1"
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 30 }}
-            transition={{ duration: 0.25 }}
-            className="space-y-6"
-          >
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-md font-normal">
-                      Your Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder=""
-                        {...field}
-                        className="h-11 rounded-sm border-slate-300 text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-md font-normal">Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="email"
-                        placeholder=""
-                        {...field}
-                        className="h-11 rounded-sm border-slate-300 text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-md font-normal">
-                      Password
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder=""
-                        {...field}
-                        className="h-11 rounded-sm border-slate-300 text-base"
-                      />
-                    </FormControl>
-                    <FormDescription className="sr-only">
-                      Minimum 6 characters
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="passwordConfirm"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-md font-normal">
-                      Password confirm
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="password"
-                        placeholder=""
-                        {...field}
-                        className="h-11 rounded-sm border-slate-300 text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-md font-normal">Phone</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="tel"
-                        inputMode="tel"
-                        placeholder=""
-                        {...field}
-                        className="h-11 rounded-sm border-slate-300 text-base"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <Button
-                type="submit"
-                disabled={form.formState.isSubmitting}
-                variant="default"
-                className="h-11 w-full text-base font-medium"
+        {/* Form */}
+        <Form {...form}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key="step1"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 30 }}
+              transition={{ duration: 0.25 }}
+              className="space-y-6"
+            >
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-5"
               >
-                {isSubmitting ? <Spinner /> : "Create account"}
-              </Button>
-            </form>
-          </motion.div>
-        </AnimatePresence>
-      </Form>
-    </div>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-md font-normal">
+                        Your Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder=""
+                          {...field}
+                          className="h-11 rounded-sm border-slate-300 text-base"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-md font-normal">
+                        Email
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder=""
+                          {...field}
+                          className="h-11 rounded-sm border-slate-300 text-base"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-md font-normal">
+                        Password
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder=""
+                          {...field}
+                          className="h-11 rounded-sm border-slate-300 text-base"
+                        />
+                      </FormControl>
+                      <FormDescription className="sr-only">
+                        Minimum 6 characters
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="passwordConfirm"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-md font-normal">
+                        Password confirm
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder=""
+                          {...field}
+                          className="h-11 rounded-sm border-slate-300 text-base"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-md font-normal">
+                        Phone
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="tel"
+                          inputMode="tel"
+                          placeholder=""
+                          {...field}
+                          className="h-11 rounded-sm border-slate-300 text-base"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  type="submit"
+                  disabled={form.formState.isSubmitting}
+                  variant="default"
+                  className="h-11 w-full text-base font-medium"
+                >
+                  {isSubmitting ? <Spinner /> : "Create account"}
+                </Button>
+              </form>
+            </motion.div>
+          </AnimatePresence>
+        </Form>
+      </div>
+    </>
   );
 }

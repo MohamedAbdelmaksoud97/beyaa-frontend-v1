@@ -97,8 +97,13 @@ export default function AddProduct() {
       navigate(`/${slug}`); // ✅ navigate to homepage
     },
     onError: (err) => {
-      console.error(err);
-      window.alert(err.message || "Failed to create product");
+      console.error("Failed to create product:", err);
+      if (err.message.includes("Verify your email first")) {
+        // redirect to the new verification page
+        return navigate(`/${slug}/verify-required`);
+      }
+
+      toast.error(err.message || "Failed to create product");
     },
   });
 

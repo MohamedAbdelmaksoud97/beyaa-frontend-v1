@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Play } from "lucide-react";
-import dashboardMockup from "@/assets/dashboard-mockup.jpg";
+//import dashboardMockup from "@/assets/dashboard-mockup.png";
+//import dashboardMockup from "@/assets/dashboard-mockup.png";
+import dashboard from "@/assets/dashboard.png";
+
 import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
@@ -61,7 +64,7 @@ const Hero = () => {
           <div className="animate-slide-up relative">
             <div className="relative">
               <img
-                src={dashboardMockup}
+                src={dashboard}
                 alt="beyaa Dashboard Preview"
                 className="h-auto w-full rounded-[var(--radius)] border border-white/10 shadow-xl"
               />

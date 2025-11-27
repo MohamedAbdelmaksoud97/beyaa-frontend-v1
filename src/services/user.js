@@ -123,3 +123,60 @@ export async function logout() {
     return {}; // handle empty response
   }
 }
+
+export const verifyEmailRequest = async (token) => {
+  const res = await fetch(`${API_BASE}/users/verifyEmail?token=${token}`, {
+    method: "GET",
+    credentials: "include", // important: receive jwt cookie
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Verification failed");
+  }
+
+  return data;
+};
+
+export async function resendVerificationEmail() {
+  const res = await fetch(`${API_BASE}/users/resendVerification`, {
+    method: "POST",
+    credentials: "include", // must include cookie
+    headers: { "Content-Type": "application/json" },
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message || "Failed to resend email");
+  }
+
+  return data;
+}
+
+export async function forgotPasswordRequest({ email }) {
+  const res = await fetch(`${API_BASE}/users/forgotPassword`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message);
+
+  return data;
+}
+
+export async function resetPasswordRequest(token, body) {
+  const res = await fetch(`${API_BASE}/users/resetPassword/${token}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.message);
+
+  return data;
+}

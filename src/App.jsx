@@ -33,6 +33,10 @@ import AboutBeyaa from "./pages/landingPage/About";
 import ScrollToTop from "./ScrollToTop";
 import StoreAbout from "./pages/About";
 import Banners from "./pages/Setting/banners";
+import VerifyEmail from "./pages/verifyEmailPage";
+import VerifyRequired from "./pages/VerifyRequired.jsx";
+import ForgotPassword from "./pages/auth/ForgotPassword.jsx";
+import ResetPassword from "./pages/auth/ReseTPassword.jsx";
 
 export default function App() {
   function RequireAuth() {
@@ -83,6 +87,14 @@ export default function App() {
                 <Route path="/:slug/myOrders" element={<MyOrders />} />
               </Route>
               <Route path="login" element={<Login />} />
+              <Route path="/forgotPassword" element={<ForgotPassword />} />
+              <Route path="/resetpassword/:token" element={<ResetPassword />} />
+
+              <Route path="/verifyEmail" element={<VerifyEmail />} />
+              <Route
+                path="/:slug/verify-required"
+                element={<VerifyRequired />}
+              />
             </Routes>
           </BrowserRouter>
         </CartProvider>

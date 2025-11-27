@@ -18,7 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/services/user";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { Loader2 } from "lucide-react"; // ✅ import loader
+import { Loader2 } from "lucide-react";
 
 // ---------------- Schema ----------------
 const SignInSchema = z.object({
@@ -28,16 +28,19 @@ const SignInSchema = z.object({
 
 export default function SignInForm() {
   const navigate = useNavigate();
+
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
       console.log("You have logged in ", data);
+
       if (!data?.data?.slug) {
         toast.success(`Let's build your store!`);
         return navigate("/createStore");
       }
+
+      toast.success("Welcome Back!");
       navigate(`/${data?.data?.slug}`);
-      toast.success(`Welcome Back!`);
     },
     onError: (error) => {
       console.error("Error:", error.message);
@@ -72,6 +75,7 @@ export default function SignInForm() {
             onSubmit={form.handleSubmit(handleSubmit)}
             className="space-y-8"
           >
+            {/* Title */}
             <div className="space-y-2">
               <h1 className="text-xl font-semibold tracking-tight">Log in</h1>
             </div>
@@ -118,16 +122,15 @@ export default function SignInForm() {
               )}
             />
 
-            {/* Actions row */}
-            <div className="mt-1 flex items-center justify-between text-sm">
-              <span className="text-secondary-900">Forget password?</span>
-              <Button
-                className="text-secondary-900 hover:text-secondary-300 px-1 font-medium underline"
-                variant="link"
-                size="sm"
+            {/* Forgot password link */}
+            <div className="mt-1 flex items-center justify-end text-sm">
+              <button
+                type="button"
+                onClick={() => navigate("/forgotPassword")}
+                className="text-primary-500 hover:text-primary-600 cursor-pointer font-medium underline"
               >
-                Click here
-              </Button>
+                Forgot password?
+              </button>
             </div>
 
             {/* Submit */}
